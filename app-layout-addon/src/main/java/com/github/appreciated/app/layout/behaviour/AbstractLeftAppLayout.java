@@ -145,4 +145,8 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         titleWrapper.addComponentAsFirst(appBarIconComponent);
         titleWrapper.setComponentAlignment(appBarIconComponent, Alignment.MIDDLE_LEFT);
     }
+
+    public void removeAllAppBarElement() {
+        appBarElementContainer.removeAllComponents();
+    }
 }
