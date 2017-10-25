@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.component;
 
 import com.vaadin.server.Resource;
 import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -11,18 +12,26 @@ import static com.github.appreciated.app.layout.Styles.*;
 
 public class MenuHeader extends VerticalLayout {
     public MenuHeader(Resource resource) {
-        this(null, null, resource);
+        this(null, null, resource, null);
     }
 
     public MenuHeader(String title, Resource resource) {
-        this(title, null, resource);
+        this(title, null, resource, null);
     }
 
     public MenuHeader(String title, String subtitle, Resource resource) {
-        this(title, subtitle, resource != null ? new RoundImage(resource) : null);
+        this(title, subtitle, resource != null ? new RoundImage(resource) : null, null);
     }
 
-    public MenuHeader(String title, String subtitle, Image image) {
+    public MenuHeader(String title, Resource resource, Button logout) {
+        this(title, null, resource != null ? new RoundImage(resource) : null, logout);
+    }
+
+    public MenuHeader(String title, String subtitle, Resource resource, Button logout) {
+        this(title, subtitle, resource != null ? new RoundImage(resource) : null, logout);
+    }
+
+    public MenuHeader(String title, String subtitle, Image image, Button logout) {
         Label name = new Label(title);
         name.addStyleName(APP_LAYOUT_MENU_HEADER_TITLE);
         Label description = new Label(subtitle);
@@ -39,6 +48,9 @@ public class MenuHeader extends VerticalLayout {
             addComponent(name);
         if (subtitle != null)
             addComponent(description);
+        if (logout != null) {
+            addComponent(logout);
+        }
     }
 
 }
