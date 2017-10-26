@@ -20,15 +20,15 @@ public class MenuHeader extends VerticalLayout {
     }
 
     public MenuHeader(String title, String subtitle, Resource resource) {
-        this(title, subtitle, resource != null ? new RoundImage(resource) : null, null);
+        this(title, subtitle, resource != null ? new Image(null, resource) : null, null);
     }
 
     public MenuHeader(String title, Resource resource, Button logout) {
-        this(title, null, resource != null ? new RoundImage(resource) : null, logout);
+        this(title, null, resource != null ? new Image(null, resource) : null, logout);
     }
 
     public MenuHeader(String title, String subtitle, Resource resource, Button logout) {
-        this(title, subtitle, resource != null ? new RoundImage(resource) : null, logout);
+        this(title, subtitle, resource != null ? new Image(null, resource) : null, logout);
     }
 
     public MenuHeader(String title, String subtitle, Image image, Button logout) {
@@ -43,6 +43,7 @@ public class MenuHeader extends VerticalLayout {
         setSpacing(false);
         setMargin(new MarginInfo(true, false, false, false));
         if (image != null)
+            image.setWidth("220px");
             addComponent(image);
         if (title != null)
             addComponent(name);
