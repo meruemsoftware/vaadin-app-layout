@@ -43,7 +43,7 @@ public class MenuHeader extends VerticalLayout {
         setSpacing(false);
         setMargin(new MarginInfo(true, false, false, false));
         if (image != null)
-            image.setWidth("220px");
+            image.setHeight("75px");
             addComponent(image);
         if (title != null)
             addComponent(name);
