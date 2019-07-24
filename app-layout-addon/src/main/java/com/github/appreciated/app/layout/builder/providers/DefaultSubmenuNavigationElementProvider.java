@@ -5,11 +5,19 @@ import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationEleme
 import com.github.appreciated.app.layout.component.ExpandingMenuContainer;
 import com.vaadin.ui.Component;
 
+import java.util.UUID;
+
 public class DefaultSubmenuNavigationElementProvider implements ComponentProvider<SubmenuNavigationElement> {
     @Override
     public Component get(SubmenuNavigationElement element) {
         ExpandingMenuContainer container = new ExpandingMenuContainer(element.getTitle(), element.getIcon());
-        element.getSubmenuElements().forEach(element1 -> container.addComponent(element1.getComponent()));
+        container.setId(UUID.randomUUID().toString());
+        element.getSubmenuElements().forEach(child -> {
+            if (child instanceof SubmenuNavigationElement) {
+                child.getComponent().setId(container.getId() + ">" + UUID.randomUUID().toString());
+            }
+            container.addComponent(child.getComponent());
+        });
         return container;
     }
 }
