@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.behaviour;
 
+import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.component.VerticalFlexBoxLayout;
 import com.vaadin.server.Page;
@@ -10,7 +11,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import java.io.IOException;
 
 
-public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout {
+public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
 
@@ -46,7 +47,7 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, appBarElementWrapper);
+        appBar.addComponents(titleWrapper, appBarElementWrapper, new AppLayoutResizeListener(this));
         appBar.setExpandRatio(appBarElementWrapper, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
         appBar.setHeight(100, Unit.PERCENTAGE);
@@ -119,6 +120,11 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     @Override
     public Panel getContentHolder() {
         return contentPanel;
+    }
+
+    @Override
+    public void onAppLayoutResized() {
+        getUI().access(() -> getUI().markAsDirty());
     }
 
     public HorizontalLayout getTitleWrapper() {
